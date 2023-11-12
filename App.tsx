@@ -11,7 +11,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import SamplePage from './src/screens/samples/Samples';
 import HomePage from './src/screens/home/Home';
 import PaintingPage from './src/screens/painting/Painting';
-import GraphPage from './src/screens/graph/Graph';
+import GroupPage from './src/screens/group/Group';
 
 const Stack = createStackNavigator();
 
@@ -22,7 +22,7 @@ function App(): JSX.Element {
         <Stack.Screen name="Samples" component={SamplePage} />
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="Painting" component={PaintingPage} />
-        <Stack.Screen name="Graph" component={GraphPage} />
+        <Stack.Screen name="Group" component={GroupPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

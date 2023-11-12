@@ -16,14 +16,11 @@ const PaintingPage : React.FC = () => {
     <View style={styles.container}>
         <Canvas style={{width, height}}>
         <Circle c={c} r={r} color="red">
+            {/* <Paint color="blue" style="stroke" strokeWidth={strokeWidth} /> */}
             {/* <Paint color="lightblue" /> */}
-            <Paint color="blue" style="stroke" strokeWidth={strokeWidth} />
             {/* <Paint color="#ade6d8" style="stroke" strokeWidth={strokeWidth / 2} /> */}
         </Circle>
         </Canvas>
-        <Text>
-            Sets the geometry drawn at the corners of strokes. Values can be bevel, miter, or round.
-        </Text>
         <Canvas style={{ width, height }}>
             {/*
             <Group opacity={0.5}>
@@ -58,5 +55,5 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-  });
+});
 

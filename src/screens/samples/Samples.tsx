@@ -10,7 +10,7 @@ const SamplePage: React.FC<HomeScreenProps> = props => {
   const [list] = useState([
     {name: 'Home', id: 'Home'},
     {name: 'Painting', id: 'Painting'},
-    {name: 'Graph', id: 'Graph'},
+    // {name: 'Group', id: 'Group'},
   ]);
 
   const pressHandler = (id: string) => {
