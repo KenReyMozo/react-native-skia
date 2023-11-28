@@ -12,7 +12,15 @@ const SamplePage: React.FC<HomeScreenProps> = props => {
     {name: 'Painting', id: 'Painting'},
     // {name: 'Group', id: 'Group'},
     {name: 'Sample0', id: 'Sample1'},
-    {name: 'Sample1', id: 'Sample2'},
+    // {name: 'Sample1', id: 'Sample2'},
+    // {name: 'Sample2', id: 'Sample3'},
+    // {name: 'Sample2', id: 'Sample3'},
+    // {name: 'Sample2', id: 'Sample3'},
+    {name: 'Line Chart', id: 'LineChart'},
+    {name: 'Chasing Bubbles', id: 'ChasingBubbles'},
+    {name: 'Chasing Bubbles', id: 'ChasingBubbles'},
+    {name: 'Wave Meter', id: 'WaveMeter'},
+    {name: 'Bending Circle', id: 'BendingCircle'},
   ]);
 
   const pressHandler = (id: string) => {

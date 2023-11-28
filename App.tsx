@@ -15,9 +15,13 @@ import PaintingPage from './src/screens/painting/Painting';
 import GroupPage from './src/screens/group/Group';
 import {Confetti} from './src/screens/sample/Sample2';
 import Sample1 from './src/screens/sample/Sample1';
+import {LineChart} from './src/screens/line-chart/LineChart';
+import {ChasingBubbles} from './src/screens/chasing-bubble/ChasingBubbles';
+import {WaveMeter} from './src/screens/wave-meter/WaveMeter';
+import {BendingCircle} from './src/screens/bending-circle/BendingCircle';
 
 const Stack = createStackNavigator();
-
+// https://github.com/friyiajr/SkiaAnimationShowcase
 function App(): JSX.Element {
   return (
     <NavigationContainer>
@@ -28,6 +32,10 @@ function App(): JSX.Element {
         <Stack.Screen name="Group" component={GroupPage} />
         <Stack.Screen name="Sample0" component={Confetti} />
         <Stack.Screen name="Sample1" component={Sample1} />
+        <Stack.Screen name="LineChart" component={LineChart} />
+        <Stack.Screen name="ChasingBubbles" component={ChasingBubbles} />
+        <Stack.Screen name="WaveMeter" component={WaveMeter} />
+        <Stack.Screen name="BendingCircle" component={BendingCircle} />
       </Stack.Navigator>
     </NavigationContainer>
   );
