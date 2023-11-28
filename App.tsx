@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -13,6 +14,7 @@ import HomePage from './src/screens/home/Home';
 import PaintingPage from './src/screens/painting/Painting';
 import GroupPage from './src/screens/group/Group';
 import {Confetti} from './src/screens/sample/Sample2';
+import Sample1 from './src/screens/sample/Sample1';
 
 const Stack = createStackNavigator();
 
@@ -24,7 +26,8 @@ function App(): JSX.Element {
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="Painting" component={PaintingPage} />
         <Stack.Screen name="Group" component={GroupPage} />
-        <Stack.Screen name="Sample1" component={Confetti} />
+        <Stack.Screen name="Sample0" component={Confetti} />
+        <Stack.Screen name="Sample1" component={Sample1} />
       </Stack.Navigator>
     </NavigationContainer>
   );

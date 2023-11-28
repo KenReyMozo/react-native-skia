@@ -1,81 +1,132 @@
 /* eslint-disable prettier/prettier */
-import {StatusBar, useWindowDimensions} from 'react-native';
-import React, {useMemo} from 'react';
-import {
-  Blur,
-  Circle,
-  ColorMatrix,
-  Group,
-  Paint,
-  SweepGradient,
-  runSpring,
-  useValue,
-  vec,
-} from '@shopify/react-native-skia';
-import Touchable, {useGestureHandler} from 'react-native-skia-gesture';
 
-const RADIUS = 80;
+/* eslint-disable prettier/prettier */
+import { Dimensions, Animated, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart,
+} from 'react-native-chart-kit';
+import { Easing } from 'react-native-reanimated';
 
 export default function Sample1() {
-  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
-  const cx = useValue(windowWidth / 2);
-  const cy = useValue(windowHeight / 2);
+  const screenWidth = Dimensions.get('window').width;
 
-  const gestureHandler = useGestureHandler<{
-    x: number;
-    y: number;
-  }>({
-    onStart: (_, context) => {
-      context.x = cx.current;
-      context.y = cy.current;
-    },
-    onActive: ({translationX, translationY}, context) => {
-      cx.current = translationX + context.x;
-      cy.current = translationY + context.y;
-    },
-    onEnd: () => {
-      runSpring(cx, windowWidth / 2);
-      runSpring(cy, windowHeight / 2);
-    },
+  const [data, setData] = useState({
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    datasets: [
+      {
+        data: [
+          Math.random() * 200,
+          Math.random() * 100,
+          Math.random() * 200,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 300,
+        ],
+      },
+    ],
   });
 
-  const layer = useMemo(() => {
-    return (
-      <Paint>
-        {/* pixelOpacity > blurredOpacity * 60 - 30 */}
-        <Blur blur={30} />
-        <ColorMatrix
-          matrix={[
-            // R, G, B, A, Bias (Offset)
-            // prettier-ignore
-            1, 0, 0, 0, 0,
-            // prettier-ignore
-            0, 1, 0, 0, 0,
-            // prettier-ignore
-            0, 0, 1, 0, 0,
-            // prettier-ignore
-            0, 0, 0, 60, -30,
-          ]}
-        />
-      </Paint>
-    );
-  }, []);
+  const handleDataChange = () => {
+    setData({
+      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+      datasets: [
+        {
+          data: [
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+          ],
+        },
+      ],
+    });
+    setDataProgress({
+      labels: ['Swim', 'Bike', 'Run'], // optional
+      data: [Math.random(),Math.random(),Math.random()],
+    });
+  };
+
+  const chartConfig = {
+    backgroundColor: '#e26a00',
+    backgroundGradientFrom: '#fb8c00',
+    backgroundGradientTo: '#ffa726',
+    decimalPlaces: 2,
+    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    style: {
+      borderRadius: 16,
+    },
+    propsForDots: {
+      r: '6',
+      strokeWidth: '2',
+      stroke: '#ffa726',
+    },
+  };
+
+  const [dataProgress, setDataProgress] = useState({
+    labels: ['Swim', 'Bike', 'Run'], // optional
+    data: [0.4, 0.6, 0.8],
+  });
 
   return (
-    <>
-      <StatusBar barStyle={'light-content'} />
-      <Touchable.Canvas
-        style={{
-          flex: 1,
-          backgroundColor: '#111',
-        }}>
-        <Group layer={layer}>
-          <Touchable.Circle {...gestureHandler} cx={cx} cy={cy} r={RADIUS} />
-          <Circle cx={windowWidth / 2} cy={windowHeight / 2} r={RADIUS} />
-          <SweepGradient c={vec(0, 0)} colors={['cyan', 'magenta', 'cyan']} />
-        </Group>
-      </Touchable.Canvas>
-    </>
+    <ScrollView>
+      <View>
+      <Text>Bezier Line Chart</Text>
+          <LineChart
+            width={Dimensions.get('window').width}
+            data={data}
+            height={220}
+            yAxisLabel="$"
+            yAxisSuffix="k"
+            yAxisInterval={1}
+            chartConfig={chartConfig}
+            bezier
+          />
+
+      <Text>Line Chart</Text>
+        <LineChart
+          data={data}
+          width={screenWidth}
+          height={220}
+          chartConfig={chartConfig}
+        />
+
+      <Text>Progress Ring</Text>
+      <ProgressChart
+        data={dataProgress}
+        width={screenWidth}
+        height={220}
+        strokeWidth={16}
+        radius={32}
+        chartConfig={chartConfig}
+        hideLegend={false}
+      />
+      <TouchableOpacity onPress={handleDataChange}>
+        <Text style={styles.item}>RANDOM</Text>
+      </TouchableOpacity>
+      </View>
+
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  item: {
+    backgroundColor: '#0984e3',
+    padding: 15,
+    fontSize: 20,
+    color: 'white',
+    textAlign: 'center',
+    margin: 10,
+  },
+});

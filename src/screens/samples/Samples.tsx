@@ -11,7 +11,8 @@ const SamplePage: React.FC<HomeScreenProps> = props => {
     {name: 'Home', id: 'Home'},
     {name: 'Painting', id: 'Painting'},
     // {name: 'Group', id: 'Group'},
-    {name: 'Sample1', id: 'Sample1'},
+    {name: 'Sample0', id: 'Sample1'},
+    {name: 'Sample1', id: 'Sample2'},
   ]);
 
   const pressHandler = (id: string) => {
