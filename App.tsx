@@ -12,7 +12,6 @@ import SamplePage from './src/screens/samples/Samples';
 import HomePage from './src/screens/home/Home';
 import PaintingPage from './src/screens/painting/Painting';
 import GroupPage from './src/screens/group/Group';
-import Sample1 from './src/screens/sample/Sample1';
 import {Confetti} from './src/screens/sample/Sample2';
 
 const Stack = createStackNavigator();
