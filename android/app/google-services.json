@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "798978259100",
+    "project_id": "kenreactskia",
+    "storage_bucket": "kenreactskia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798978259100:android:5c9d462d5b59820fa49559",
+        "android_client_info": {
+          "package_name": "com.kenreactskia0"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFucV_Ke1Go4yR406hMX9pfWxiguUzMzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
