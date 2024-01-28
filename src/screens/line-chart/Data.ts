@@ -4,6 +4,19 @@ export type DataPoint = {
   value: number;
 };
 
+export const firebaseData: DataPoint[] = [
+  {date: 'a', value: 1},
+  {date: 'b', value: 2},
+  {date: 'c', value: 3},
+  {date: 'd', value: 4},
+  {date: 'e', value: 5},
+  {date: 'f', value: 6},
+  {date: 'g', value: 7},
+  {date: 'h', value: 8},
+  {date: 'i', value: 9},
+  {date: 'j', value: 10},
+];
+
 export const originalData: DataPoint[] = [
   {date: '2000-02-01T05:00:00.000Z', value: 250},
   {date: '2000-02-02T05:00:00.000Z', value: 300.35},

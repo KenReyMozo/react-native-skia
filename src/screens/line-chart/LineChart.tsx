@@ -24,6 +24,7 @@ interface GraphData {
 }
 
 export const LineChart = () => {
+
   const transition = useValue(1);
   const state = useValue({
     current: 0,
