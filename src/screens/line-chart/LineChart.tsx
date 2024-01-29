@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Canvas,
@@ -13,9 +14,10 @@ import {
   vec,
 } from '@shopify/react-native-skia';
 
-import {animatedData, DataPoint, originalData} from './Data';
+import {animatedData, DataPoint, firebaseData, firebaseDataVar, originalData} from './Data';
 import {curveBasis, line, scaleLinear, scaleTime} from 'd3';
 import {Easing, View, Pressable, Text, StyleSheet} from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 
 interface GraphData {
   min: number;
@@ -25,6 +27,52 @@ interface GraphData {
 
 export const LineChart = () => {
 
+
+  useEffect(() => {
+    // Reference to the Firestore collection
+    const collectionRef = firestore().collection('test/skia/chart');
+
+
+    // Subscribe to real-time updates on the collection
+    const unsubscribe = collectionRef.onSnapshot((snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        date: doc.id,
+        ...doc.data(),
+      }));
+
+      const assertedData = data as unknown as DataPoint[];
+      setData(assertedData);
+      // transitionStart(transition.current === 0 ? 1 : 0);
+      transitionStart(1);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const oldState = useValue(firebaseData);
+  const newState = useValue(firebaseDataVar);
+
+  const dataState = useValue({
+    old: firebaseData,
+    current: firebaseDataVar,
+  });
+
+  const setData = (data: DataPoint[]) => {
+    const sss = newState.current;
+    oldState.current = sss;
+    newState.current = data
+    console.log("OLD", oldState.current)
+    console.log("NEW", newState.current)
+  }
+
+  const addDoc = (id: string, value: number) => {
+    const docu = firestore().doc('test/skia/chart/'+id);
+    docu.set({
+      value,
+    })
+  }
+
   const transition = useValue(1);
   const state = useValue({
     current: 0,
@@ -32,7 +80,7 @@ export const LineChart = () => {
   });
 
   const GRAPH_HEIGHT = 400;
-  const GRAPH_WIDTH = 360;
+  const GRAPH_WIDTH = 300;
 
   const makeGraph = (data: DataPoint[]): GraphData => {
     const max = Math.max(...data.map(val => val.value));
@@ -69,14 +117,17 @@ export const LineChart = () => {
     });
   };
 
-  const graphData = [makeGraph(originalData), makeGraph(animatedData)];
 
   const path = useComputedValue(() => {
-    const start = graphData[state.current.current].curve;
-    const end = graphData[state.current.next].curve;
+
+    const oldGraph = makeGraph(oldState.current);
+    const newGraph = makeGraph(newState.current);
+    
+    const start = oldGraph.curve;
+    const end = newGraph.curve;
     const result = start.interpolate(end, transition.current);
-    return result?.toSVGString() ?? '0';
-  }, [state, transition]);
+    return result?.toSVGString() ?? makeGraph(firebaseData).curve.toSVGString();
+  }, [state, transition, oldState, newState]);
 
   return (
     <View style={styles.container}>
@@ -119,6 +170,7 @@ export const LineChart = () => {
           style={styles.buttonStyle}>
           <Text style={styles.textStyle}>Graph 2</Text>
         </Pressable>
+        
       </View>
     </View>
   );
@@ -144,4 +196,9 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
   },
+  test: {
+    display: 'flex',
+    flexDirection:'row',
+    flexWrap: 'wrap',
+  }
 });

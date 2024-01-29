@@ -4,17 +4,44 @@ export type DataPoint = {
   value: number;
 };
 
+export const firebaseDataVar : DataPoint[] = [
+  {date: '2000-02-01T05:00:00.000Z', value: 100},
+  {date: '2000-02-02T05:00:00.000Z', value: 990},
+  {date: '2000-02-03T05:00:00.000Z', value: 865},
+  {date: '2000-02-04T05:00:00.000Z', value: 746},
+  {date: '2000-02-05T05:00:00.000Z', value: 663},
+  {date: '2000-02-06T05:00:00.000Z', value: 573},
+  {date: '2000-02-07T05:00:00.000Z', value: 436},
+  {date: '2000-02-08T05:00:00.000Z', value: 375},
+  {date: '2000-02-08T05:00:00.000Z', value: 273},
+  {date: '2000-02-08T05:00:00.000Z', value: 135},
+  {date: '2000-02-09T05:00:00.000Z', value: 1500.47},
+  {date: '2000-02-10T05:00:00.000Z', value: 83.8},
+  {date: '2000-02-11T05:00:00.000Z', value: 100.47},
+  {date: '2000-02-12T05:00:00.000Z', value: 1000.47},
+  {date: '2000-02-13T05:00:00.000Z', value: 200.47},
+  {date: '2000-02-14T05:00:00.000Z', value: 500.47},
+  {date: '2000-02-15T05:00:00.000Z', value: 600.47},
+];
+
 export const firebaseData: DataPoint[] = [
-  {date: 'a', value: 1},
-  {date: 'b', value: 2},
-  {date: 'c', value: 3},
-  {date: 'd', value: 4},
-  {date: 'e', value: 5},
-  {date: 'f', value: 6},
-  {date: 'g', value: 7},
-  {date: 'h', value: 8},
-  {date: 'i', value: 9},
-  {date: 'j', value: 10},
+  {date: '2000-02-01T05:00:00.000Z', value: 300},
+  {date: '2000-02-02T05:00:00.000Z', value: 1},
+  {date: '2000-02-03T05:00:00.000Z', value: 1},
+  {date: '2000-02-04T05:00:00.000Z', value: 1},
+  {date: '2000-02-05T05:00:00.000Z', value: 1},
+  {date: '2000-02-06T05:00:00.000Z', value: 1},
+  {date: '2000-02-07T05:00:00.000Z', value: 1},
+  {date: '2000-02-08T05:00:00.000Z', value: 1},
+  {date: '2000-02-08T05:00:00.000Z', value: 1},
+  {date: '2000-02-08T05:00:00.000Z', value: 1},
+  {date: '2000-02-09T05:00:00.000Z', value: 1},
+  {date: '2000-02-10T05:00:00.000Z', value: 1},
+  {date: '2000-02-11T05:00:00.000Z', value: 1},
+  {date: '2000-02-12T05:00:00.000Z', value: 1},
+  {date: '2000-02-13T05:00:00.000Z', value: 1},
+  {date: '2000-02-14T05:00:00.000Z', value: 1},
+  {date: '2000-02-15T05:00:00.000Z', value: 300},
 ];
 
 export const originalData: DataPoint[] = [
