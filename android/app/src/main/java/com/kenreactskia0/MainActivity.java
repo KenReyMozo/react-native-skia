@@ -4,7 +4,13 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
-import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
+
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
+import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends ReactActivity {
 
@@ -31,9 +37,13 @@ public class MainActivity extends ReactActivity {
         DefaultNewArchitectureEntryPoint.getFabricEnabled());
   }
 
-  protected List<ReactPackage> getPackages() {
-  return Arrays.asList(
-    new MainReactPackage(),
-    new ReactNativeFirebaseAppPackage(),
-    )
+  @Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
+          new RNFirebasePackage(),
+          new RNFirebaseAuthPackage(), 
+          new RNFirebaseFirestorePackage() 
+      );
+    }
 }
