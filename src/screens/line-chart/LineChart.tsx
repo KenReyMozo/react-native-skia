@@ -25,6 +25,12 @@ interface GraphData {
   curve: SkPath;
 }
 
+export const delay = (ms: number) =>
+  new Promise((res) => {
+    setTimeout(res, ms);
+  });
+
+
 export const LineChart = () => {
 
 
@@ -44,7 +50,6 @@ export const LineChart = () => {
       const assertedData = data as unknown as DataPoint[];
       setData(assertedData);
       // transitionStart(transition.current === 0 ? 1 : 0);
-      transitionStart(1);
     });
 
     return () => unsubscribe();
@@ -52,18 +57,15 @@ export const LineChart = () => {
 
   const oldState = useValue(firebaseData);
   const newState = useValue(firebaseDataVar);
+  const transVal = useValue(1);
 
-  const dataState = useValue({
-    old: firebaseData,
-    current: firebaseDataVar,
-  });
-
-  const setData = (data: DataPoint[]) => {
+  const setData = async (data: DataPoint[]) => {
     const sss = newState.current;
     oldState.current = sss;
-    newState.current = data
-    console.log("OLD", oldState.current)
-    console.log("NEW", newState.current)
+    newState.current = data;
+  
+    await delay(1000);
+    transitionStart(1);
   }
 
   const addDoc = (id: string, value: number) => {
@@ -122,12 +124,13 @@ export const LineChart = () => {
 
     const oldGraph = makeGraph(oldState.current);
     const newGraph = makeGraph(newState.current);
-    
+
+
     const start = oldGraph.curve;
     const end = newGraph.curve;
-    const result = start.interpolate(end, transition.current);
+    const result = end.interpolate(start, transition.current);
     return result?.toSVGString() ?? makeGraph(firebaseData).curve.toSVGString();
-  }, [state, transition, oldState, newState]);
+  }, [transition]);
 
   return (
     <View style={styles.container}>
