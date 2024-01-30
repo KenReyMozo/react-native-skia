@@ -90,7 +90,7 @@ export const LineChart = () => {
     const y = scaleLinear().domain([0, max]).range([GRAPH_HEIGHT, 35]);
 
     const x = scaleTime()
-      .domain([new Date(2000, 1, 1), new Date(2000, 1, 15)])
+      .domain([new Date(2000, 1, 1), new Date(2000, 1, 8)])
       .range([10, GRAPH_WIDTH - 10]);
 
     const curvedLine = line<DataPoint>()
